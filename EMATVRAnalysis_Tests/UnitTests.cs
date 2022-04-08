@@ -10,7 +10,7 @@ namespace EMATVRAnalysis.UnitTests
         public void Test_IsAGreaterThanB_True()
         {
             // Arrange
-            var import = new Import();
+            var import = new Importer();
 
             // Act
             var result = import.IsAGreaterThanB(2, 1);
@@ -18,5 +18,23 @@ namespace EMATVRAnalysis.UnitTests
             // Assert
             Assert.AreEqual(true, result);
         }
+    }
+
+    [TestClass]
+    public class ProcessorTests
+    {
+
+    }
+
+    [TestClass]
+    public class AnalyserTests
+    {
+
+    }
+
+    [TestClass]
+    public class ReporterTests
+    {
+
     }
 }
