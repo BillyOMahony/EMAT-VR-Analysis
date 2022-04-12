@@ -7,11 +7,14 @@ using Console = System.Console;
 
 namespace EMATVRAnalysis
 {
-    public class EMATVrObject
+    public class EmatVrParticipant
     {
         private string ID { get; }
         public bool flagInAnalysis { get; }
         public decimal simulation_totalTime { get; }
+
+        // Tutorial Variables
+
         public decimal tutorial_totalTime { get; }
         public decimal tutorial_moveForwardTime { get; }
         public bool tutorial_moveForward_completeEarly { get; }
@@ -23,10 +26,16 @@ namespace EMATVRAnalysis
         public bool tutorial_thumbstick_completeEarly { get; }
         public decimal tutorial_completeTime { get; }
         public bool tutorial_complete_completeEarly { get; }
-        //public decimal 
+
+        // Shower variables
+        public decimal shower_totalTime { get; }
+        public decimal shower_lumpTime { get; }
+        public decimal shower_swellingTime { get; }
+        public decimal shower_throbbingTime { get; }
 
 
-        public EMATVrObject(
+
+        public EmatVrParticipant(
             string ID, 
             decimal simulationTotalTime, 
             decimal tutorialTotalTime, 
@@ -49,11 +58,12 @@ namespace EMATVRAnalysis
             tutorial_teleportTime = tutorialTeleportTime;
             tutorial_thumbstickTime = tutorialThumbstickTime;
             tutorial_completeTime = tutorialCompleteTime;
-            tutorial_moveForward_completeEarly = tutorial_completeCompleteEarly;
+            tutorial_moveForward_completeEarly = tutorial_moveForwardCompleteEarly;
             tutorial_rotate_completeEarly = tutorial_rotateCompleteEarly;
             tutorial_teleport_completeEarly = tutorial_TeleportCompleteEarly;
             tutorial_thumbstick_completeEarly = tutorial_thumbstickCompleteEarly;
             tutorial_complete_completeEarly = tutorial_completeCompleteEarly;
+
 
             printData();
 
