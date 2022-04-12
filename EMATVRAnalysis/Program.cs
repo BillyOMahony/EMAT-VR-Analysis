@@ -18,9 +18,18 @@ namespace EMATVRAnalysis
 
             Console.WriteLine(files.Length + " csv files have been found");
 
+            // Pre-Process each file and add the EmatVrParticipant to the list
+            List<EmatVrParticipant> participants = new List<EmatVrParticipant>();
+
             foreach (var f in files)
             {
-                Processor.ProcessFile(f);
+                participants.Add(Processor.ProcessFile(f));
+            }
+
+            foreach (var p in participants)
+            {
+                p.PrintData();
+                Console.WriteLine("====================================");
             }
 
             Console.ReadKey();

@@ -168,7 +168,7 @@ namespace EMATVRAnalysis
 
             decimal CancerTime = d["CancerSelected"];
             decimal SpermaticTime = d["SpermaticCordSelected"];
-            decimal EpididymisTime = d["SpermaticCordSelected"];
+            decimal EpididymisTime = d["EpididymisSelected"];
 
             if (CancerTime < SpermaticTime && SpermaticTime < EpididymisTime)
             {

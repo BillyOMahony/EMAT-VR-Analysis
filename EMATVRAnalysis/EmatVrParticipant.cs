@@ -105,9 +105,6 @@ namespace EMATVRAnalysis
             RecapChecklistTime = recapChecklistTime;
             RecapMedkitTime = recapMedkitTime;
 
-
-            printData();
-
             // Set a flag that this file should be manually inspected.
             if (SimulationTotalTime <= 0 ||
                 TutorialMoveForwardTime <= 0 ||
@@ -124,13 +121,17 @@ namespace EMATVRAnalysis
                 BedroomTouchBookTime <= 0 ||
                 BedroomCancerSelectionPosition <= 0 ||
                 BedroomEpididymisSelectionPosition <= 0 ||
-                BedroomSpermaticCordSelectionPosition <= 0)
+                BedroomSpermaticCordSelectionPosition <= 0 ||
+                RecapTotalTime <= 0 || 
+                RecapFingerprintTime <= 0 ||
+                RecapChecklistTime <= 0 || 
+                RecapMedkitTime <= 0)
             {
                 FlagInAnalysis = true;
             }
         }
 
-        public void printData()
+        public void PrintData()
         {
             Console.WriteLine("\nID: " + ID +
                               "\nSimulation Total Time: " + SimulationTotalTime +
@@ -150,9 +151,19 @@ namespace EMATVRAnalysis
                               "\nShower Total Time: " + ShowerTotalTime +
                               "\nShower Lump Search Time: " + ShowerLumpTime + 
                               "\nShower Swelling Search Time: " + ShowerSwellingTime + 
-                              "\nShower Throbbing Search Time: " + ShowerThrobbingTime
-                              
-                              );
+                              "\nShower Throbbing Search Time: " + ShowerThrobbingTime + 
+                              "\n\nBEDROOM---------\n" +
+                              "\nBedroom Total Time: " + BedroomTotalTime +
+                              "\nBedroom Touch Book Time: " + BedroomTouchBookTime +
+                              "\nCancer Selection Position: " + BedroomCancerSelectionPosition +
+                              "\nEpididymis Selection Position: " + BedroomEpididymisSelectionPosition + 
+                              "\nBedroom Spermatic Cord Selection Position: " + BedroomSpermaticCordSelectionPosition +
+                              "\n\nRECAP-----------\n" +
+                              "\nRecap Total Time: " + RecapTotalTime + 
+                              "\nRecap Fingerprint Time: " + RecapFingerprintTime + 
+                              "\nRecap Checklist Time: " + RecapChecklistTime +
+                              "\nRecap Medkit Time: " + RecapMedkitTime
+            );
         }
 
     }

@@ -32,7 +32,6 @@ namespace EMATVRAnalysis
                 FileInfo fi = new FileInfo(t);
                 if (fi.Extension.Equals(".csv"))
                 {
-                    Console.WriteLine(fi.Extension);
                     output.Add(t);
                 }
             }
