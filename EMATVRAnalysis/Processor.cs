@@ -12,14 +12,14 @@ namespace EMATVRAnalysis
     {
         public static EMATVrObject ProcessFile(string path)
         {
-            Dictionary<string, decimal> VREvents = GetVREvents(path);
+            Dictionary<string, decimal> VREvents = ImportVrEventsToDictionary(path);
 
-            string id = GetID(path);
+            string id = GetId(path);
 
             return ParseDictionaryToObject(id, VREvents);
         }
 
-        static string GetID(string path)
+        static string GetId(string path)
         {
             return Path.GetFileNameWithoutExtension(path);
         }
@@ -27,7 +27,7 @@ namespace EMATVRAnalysis
         /**
          * Creates a Dictionary out of the events in the csv file at the provided path
          */
-        static Dictionary<string, decimal> GetVREvents(string path)
+        static Dictionary<string, decimal> ImportVrEventsToDictionary(string path)
         {
             Dictionary<string, decimal> VREvents = new Dictionary<string, decimal>();
 
@@ -81,23 +81,43 @@ namespace EMATVRAnalysis
         static EMATVrObject ParseDictionaryToObject(string ID, Dictionary<string, decimal> d)
         {
             decimal simulation_totalTime = GetTimeDifference(d, "Start", "End");
+
+            // Tutorial decimals
             decimal tutorial_totalTime = GetTimeDifference(d, "TutorialEnded", "TutorialStart");
             decimal tutorial_moveForwardTime = GetTimeDifference(d, "MoveForwardAudioStarted", "MoveForwardObjectiveReached");
             decimal tutorial_rotateTime = GetTimeDifference(d, "RotateAudioStarted", "Rotate3");
             decimal tutorial_teleportTime = GetTimeDifference(d, "TeleportAudioStarted", "TeleportForwardObjectiveReached");
             decimal tutorial_thumbstickTime = GetTimeDifference(d, "ChangeControllerAudioStarted", "ThumbstickPressed3");
             decimal tutorial_completeTime = GetTimeDifference(d, "CompleteTutorialAudioStarted", "FinalMarkerReached");
-            //public decimal 
+            
+            // Tutorial bools
+            bool tutorial_moveForward_completeEarly = !d.ContainsKey("TeleportStateStarted");
+            bool tutorial_rotate_completeEarly = !d.ContainsKey("RotateStateStarted");
+            bool tutorial_teleport_completeEarly = !d.ContainsKey("TeleportStateStarted");
+            bool tutorial_thumbstick_completeEarly = !d.ContainsKey("ChangeControllerStateStarted");
+            bool tutorial_complete_completeEarly = !d.ContainsKey("CompleteTutorialStateStarted");
+
+            // Shower decimals
+            decimal shower_totalTime = GetTimeDifference(d, "ShowerStageEnded", "ShowerStageStarted");
+            decimal shower_lumpTime = GetTimeDifference(d, "LumpSearchStarted", "LumpFound");
+            decimal shower_swellingTime = GetTimeDifference(d, "SwellingSearchStarted", "SwellingFound");
+            decimal shower_throbbingTime = GetTimeDifference(d, "ThrobbingSearchStarted", "ThrobbingFound");
 
             return new EMATVrObject(
                 ID,
                 simulation_totalTime,
                 tutorial_totalTime,
                 tutorial_moveForwardTime,
+                tutorial_moveForward_completeEarly,
                 tutorial_rotateTime,
+                tutorial_rotate_completeEarly,
                 tutorial_teleportTime,
+                tutorial_teleport_completeEarly,
                 tutorial_thumbstickTime,
-                tutorial_completeTime
+                tutorial_thumbstick_completeEarly,
+                tutorial_completeTime,
+                tutorial_complete_completeEarly
+
             );
         }
 

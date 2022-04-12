@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Console = System.Console;
 
 namespace EMATVRAnalysis
 {
@@ -33,9 +34,10 @@ namespace EMATVRAnalysis
             bool tutorial_moveForwardCompleteEarly,
             decimal tutorialRotateTime, 
             bool tutorial_rotateCompleteEarly,
-            decimal tutorialTeleportTime, 
+            decimal tutorialTeleportTime,
+            bool tutorial_TeleportCompleteEarly,
+            decimal tutorialThumbstickTime,
             bool tutorial_thumbstickCompleteEarly,
-            decimal tutorialThumbstickTime, 
             decimal tutorialCompleteTime,
             bool tutorial_completeCompleteEarly)
         {
@@ -49,6 +51,7 @@ namespace EMATVRAnalysis
             tutorial_completeTime = tutorialCompleteTime;
             tutorial_moveForward_completeEarly = tutorial_completeCompleteEarly;
             tutorial_rotate_completeEarly = tutorial_rotateCompleteEarly;
+            tutorial_teleport_completeEarly = tutorial_TeleportCompleteEarly;
             tutorial_thumbstick_completeEarly = tutorial_thumbstickCompleteEarly;
             tutorial_complete_completeEarly = tutorial_completeCompleteEarly;
 
@@ -73,10 +76,17 @@ namespace EMATVRAnalysis
             Console.WriteLine("Simulation Total Time: " + simulation_totalTime);
             Console.WriteLine("\nTUTORIAL---------\n");
             Console.WriteLine("Total Time: " + tutorial_totalTime);
-            Console.WriteLine("Move Forward Time " + tutorial_moveForwardTime);
+            Console.WriteLine("Move Forward Time: " + tutorial_moveForwardTime);
+            Console.WriteLine("Move Forward Completed Pre Audio: " + tutorial_moveForward_completeEarly);
+            Console.WriteLine("Rotate Time: " + tutorial_rotateTime);
+            Console.WriteLine("Rotate Completed Pre Audio: " + tutorial_rotate_completeEarly);
             Console.WriteLine("Teleport Time: " + tutorial_teleportTime);
+            Console.WriteLine("Teleport Completed Pre Audio: " + tutorial_teleport_completeEarly);
             Console.WriteLine("Thumbstick Time: " + tutorial_thumbstickTime);
+            Console.WriteLine("Thumbstick Completed Pre Audio: " + tutorial_thumbstick_completeEarly);
             Console.WriteLine("Complete Time: " + tutorial_completeTime);
+            Console.WriteLine("Complete Completed Pre Audio: " + tutorial_complete_completeEarly);
+
 
         }
 
