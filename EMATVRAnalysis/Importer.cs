@@ -6,14 +6,9 @@ using System.Threading.Tasks;
 
 namespace EMATVRAnalysis
 {
-    public class Importer
+    public static class Importer
     {
-        public Importer()
-        {
-
-        }
-
-        public string[] GetFolderContents(string path)
+        public static string[] GetFolderContents(string path)
         {
             string[] result = null;
             try
@@ -28,9 +23,23 @@ namespace EMATVRAnalysis
             return result;
         }
 
-        public bool IsAGreaterThanB(int a, int b)
+        public static string[] GetCSVFilesFromArray(string[] files)
         {
-            return a > b;
+            List<string> output = new List<string>();
+
+            foreach (var t in files)
+            {
+                FileInfo fi = new FileInfo(t);
+                if (fi.Extension.Equals(".csv"))
+                {
+                    Console.WriteLine(fi.Extension);
+                    output.Add(t);
+                }
+            }
+
+            return output.ToArray();
         }
+
+
     }
 }
