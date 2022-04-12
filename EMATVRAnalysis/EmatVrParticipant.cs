@@ -32,7 +32,20 @@ namespace EMATVRAnalysis
         public decimal ShowerLumpTime { get; }
         public decimal ShowerSwellingTime { get; }
         public decimal ShowerThrobbingTime { get; }
+        
+        // Bedroom variables
+        public decimal BedroomTotalTime { get; }
+        // The time it took the user to touch the book from the START of the level
+        public decimal BedroomTouchBookTime { get; }
+        public int BedroomCancerSelectionPosition { get; }
+        public int BedroomEpididymisSelectionPosition { get; }
+        public int BedroomSpermaticCordSelectionPosition { get; }
 
+        // Recap variables
+        public decimal RecapTotalTime { get; }
+        public decimal RecapFingerprintTime { get; }
+        public decimal RecapChecklistTime { get; }
+        public decimal RecapMedkitTime { get; }
 
 
         public EmatVrParticipant(
@@ -52,8 +65,16 @@ namespace EMATVRAnalysis
             decimal showerTotalTime, 
             decimal showerLumpTime, 
             decimal showerSwellingTime, 
-            decimal showerThrobbingTime
-            )
+            decimal showerThrobbingTime, 
+            decimal bedroomTotalTime, 
+            decimal bedroomTouchBookTime, 
+            int bedroomCancerSelectionPosition, 
+            int bedroomEpididymisSelectionPosition, 
+            int bedroomSpermaticCordSelectionPosition, 
+            decimal recapTotalTime, 
+            decimal recapFingerprintTime, 
+            decimal recapChecklistTime, 
+            decimal recapMedkitTime)
         {
             this.ID = ID;
             SimulationTotalTime = simulationTotalTime;
@@ -74,17 +95,36 @@ namespace EMATVRAnalysis
             ShowerLumpTime = showerLumpTime;
             ShowerSwellingTime = showerSwellingTime;
             ShowerThrobbingTime = showerThrobbingTime;
+            BedroomTotalTime = bedroomTotalTime;
+            BedroomTouchBookTime = bedroomTouchBookTime;
+            BedroomCancerSelectionPosition = bedroomCancerSelectionPosition;
+            BedroomEpididymisSelectionPosition = bedroomEpididymisSelectionPosition;
+            BedroomSpermaticCordSelectionPosition = bedroomSpermaticCordSelectionPosition;
+            RecapTotalTime = recapTotalTime;
+            RecapFingerprintTime = recapFingerprintTime;
+            RecapChecklistTime = recapChecklistTime;
+            RecapMedkitTime = recapMedkitTime;
 
 
             printData();
 
+            // Set a flag that this file should be manually inspected.
             if (SimulationTotalTime <= 0 ||
                 TutorialMoveForwardTime <= 0 ||
                 TutorialTotalTime <= 0 || 
                 TutorialRotateTime <= 0 || 
                 TutorialTeleportTime <= 0 ||
                 TutorialThumbstickTime <= 0 ||
-                TutorialCompleteTime <= 0)
+                TutorialCompleteTime <= 0 ||
+                ShowerTotalTime <= 0 ||
+                ShowerLumpTime <= 0 ||
+                ShowerSwellingTime <= 0 ||
+                ShowerThrobbingTime <= 0 || 
+                BedroomTotalTime <= 0 ||
+                BedroomTouchBookTime <= 0 ||
+                BedroomCancerSelectionPosition <= 0 ||
+                BedroomEpididymisSelectionPosition <= 0 ||
+                BedroomSpermaticCordSelectionPosition <= 0)
             {
                 FlagInAnalysis = true;
             }
@@ -92,23 +132,27 @@ namespace EMATVRAnalysis
 
         public void printData()
         {
-            Console.WriteLine();
-            Console.WriteLine("ID: " + ID);
-            Console.WriteLine("Simulation Total Time: " + SimulationTotalTime);
-            Console.WriteLine("\nTUTORIAL---------\n");
-            Console.WriteLine("Total Time: " + TutorialTotalTime);
-            Console.WriteLine("Move Forward Time: " + TutorialMoveForwardTime);
-            Console.WriteLine("Move Forward Completed Pre Audio: " + TutorialMoveForwardCompleteEarly);
-            Console.WriteLine("Rotate Time: " + TutorialRotateTime);
-            Console.WriteLine("Rotate Completed Pre Audio: " + TutorialRotateCompleteEarly);
-            Console.WriteLine("Teleport Time: " + TutorialTeleportTime);
-            Console.WriteLine("Teleport Completed Pre Audio: " + TutorialTeleportCompleteEarly);
-            Console.WriteLine("Thumbstick Time: " + TutorialThumbstickTime);
-            Console.WriteLine("Thumbstick Completed Pre Audio: " + TutorialThumbstickCompleteEarly);
-            Console.WriteLine("Complete Time: " + TutorialCompleteTime);
-            Console.WriteLine("Complete Completed Pre Audio: " + TutorialCompleteCompleteEarly);
-
-
+            Console.WriteLine("\nID: " + ID +
+                              "\nSimulation Total Time: " + SimulationTotalTime +
+                              "\n\nTUTORIAL---------\n" +
+                              "\nTotal Time: " + TutorialTotalTime +
+                              "\nMove Forward Time: " + TutorialMoveForwardTime +
+                              "\nMove Forward Completed Pre Audio: " + TutorialMoveForwardCompleteEarly +
+                              "\nRotate Time: " + TutorialRotateTime +
+                              "\nRotate Completed Pre Audio: " + TutorialRotateCompleteEarly +
+                              "\nTeleport Time: " + TutorialTeleportTime +
+                              "\nTeleport Completed Pre Audio: " + TutorialTeleportCompleteEarly +
+                              "\nThumbstick Time: " + TutorialThumbstickTime +
+                              "\nThumbstick Completed Pre Audio: " + TutorialThumbstickCompleteEarly +
+                              "\nComplete Time: " + TutorialCompleteTime +
+                              "\nComplete Completed Pre Audio: " + TutorialCompleteCompleteEarly +
+                              "\n\nSHOWER----------\n" +
+                              "\nShower Total Time: " + ShowerTotalTime +
+                              "\nShower Lump Search Time: " + ShowerLumpTime + 
+                              "\nShower Swelling Search Time: " + ShowerSwellingTime + 
+                              "\nShower Throbbing Search Time: " + ShowerThrobbingTime
+                              
+                              );
         }
 
     }

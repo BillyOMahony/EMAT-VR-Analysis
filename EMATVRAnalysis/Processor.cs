@@ -10,7 +10,7 @@ namespace EMATVRAnalysis
 {
     public static class Processor
     {
-        public static EMATVrObject ProcessFile(string path)
+        public static EmatVrParticipant ProcessFile(string path)
         {
             Dictionary<string, decimal> VREvents = ImportVrEventsToDictionary(path);
 
@@ -78,7 +78,7 @@ namespace EMATVRAnalysis
             return VREvents;
         }
 
-        static EMATVrObject ParseDictionaryToObject(string ID, Dictionary<string, decimal> d)
+        static EmatVrParticipant ParseDictionaryToObject(string ID, Dictionary<string, decimal> d)
         {
             decimal simulation_totalTime = GetTimeDifference(d, "Start", "End");
 
@@ -103,7 +103,20 @@ namespace EMATVRAnalysis
             decimal shower_swellingTime = GetTimeDifference(d, "SwellingSearchStarted", "SwellingFound");
             decimal shower_throbbingTime = GetTimeDifference(d, "ThrobbingSearchStarted", "ThrobbingFound");
 
-            return new EMATVrObject(
+            // Bedroom information
+            decimal bedroom_totalTime = GetTimeDifference(d, "TesteStageStarted", "TesteStageEnded");
+            decimal bedroom_touchBookTime = GetTimeDifference(d, "TesteStageStarted", "BookOpened");
+
+            int bedroom_cancer_pos, bedroom_epididymis_pos, bedroom_spermaticCord_pos;
+            GetTesteSelectOrder(d, out bedroom_cancer_pos, out bedroom_epididymis_pos, out bedroom_spermaticCord_pos);
+
+            // Recap information
+            decimal recap_totalTime = GetTimeDifference(d, "RecapStageStarted", "End");
+            decimal recap_fingerprintTime = GetTimeDifference(d, "FingerprintSearchStarted", "FingerprintFound");
+            decimal recap_checklistTime = GetTimeDifference(d, "ChecklistSearchStarted", "ChecklistFound");
+            decimal recap_medkitTime = GetTimeDifference(d, "MedkitSearchStarted", "MedkitFound");
+
+            return new EmatVrParticipant(
                 ID,
                 simulation_totalTime,
                 tutorial_totalTime,
@@ -116,8 +129,20 @@ namespace EMATVRAnalysis
                 tutorial_thumbstickTime,
                 tutorial_thumbstick_completeEarly,
                 tutorial_completeTime,
-                tutorial_complete_completeEarly
-
+                tutorial_complete_completeEarly,
+                shower_totalTime,
+                shower_lumpTime,
+                shower_swellingTime,
+                shower_throbbingTime,
+                bedroom_totalTime,
+                bedroom_touchBookTime,
+                bedroom_cancer_pos,
+                bedroom_epididymis_pos,
+                bedroom_spermaticCord_pos,
+                recap_totalTime,
+                recap_fingerprintTime,
+                recap_checklistTime,
+                recap_medkitTime
             );
         }
 
@@ -130,6 +155,57 @@ namespace EMATVRAnalysis
             
             return Math.Abs(d[key1] - d[key2]);
         }
-        
+
+        static void GetTesteSelectOrder(Dictionary<string, decimal> d, out int Cancer, out int Epididymis,
+            out int Spermatic)
+        {
+            Cancer = 0;
+            Epididymis = 0;
+            Spermatic = 0;
+
+            if (!d.ContainsKey("CancerSelected") || !d.ContainsKey("SpermaticCordSelected") ||
+                !d.ContainsKey("SpermaticCordSelected")) return;
+
+            decimal CancerTime = d["CancerSelected"];
+            decimal SpermaticTime = d["SpermaticCordSelected"];
+            decimal EpididymisTime = d["SpermaticCordSelected"];
+
+            if (CancerTime < SpermaticTime && SpermaticTime < EpididymisTime)
+            {
+                Cancer = 1;
+                Spermatic = 2;
+                Epididymis = 3;
+            }
+            else if (CancerTime < EpididymisTime && EpididymisTime < SpermaticTime)
+            {
+                Cancer = 1;
+                Epididymis = 2;
+                Spermatic = 3;
+            }
+            else if (SpermaticTime < CancerTime && CancerTime < EpididymisTime)
+            {
+                Spermatic = 1;
+                Cancer = 2;
+                Epididymis = 3;
+            }
+            else if (SpermaticTime < EpididymisTime && EpididymisTime < CancerTime)
+            {
+                Spermatic = 1;
+                Cancer = 2;
+                Epididymis = 3;
+            }
+            else if (EpididymisTime < CancerTime && CancerTime < SpermaticTime)
+            {
+                Epididymis = 1;
+                Cancer = 2;
+                Spermatic = 3;
+            }
+            else if (EpididymisTime < SpermaticTime && SpermaticTime < CancerTime)
+            {
+                Epididymis = 1;
+                Spermatic = 2;
+                Cancer = 3;
+            }
+        }
     }
 }
