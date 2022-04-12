@@ -10,28 +10,28 @@ namespace EMATVRAnalysis
     public class EmatVrParticipant
     {
         private string ID { get; }
-        public bool flagInAnalysis { get; }
-        public decimal simulation_totalTime { get; }
+        public bool FlagInAnalysis { get; }
+        public decimal SimulationTotalTime { get; }
 
         // Tutorial Variables
 
-        public decimal tutorial_totalTime { get; }
-        public decimal tutorial_moveForwardTime { get; }
-        public bool tutorial_moveForward_completeEarly { get; }
-        public decimal tutorial_rotateTime { get; }
-        public bool tutorial_rotate_completeEarly { get; }
-        public decimal tutorial_teleportTime { get; }
-        public bool tutorial_teleport_completeEarly { get; }
-        public decimal tutorial_thumbstickTime { get; }
-        public bool tutorial_thumbstick_completeEarly { get; }
-        public decimal tutorial_completeTime { get; }
-        public bool tutorial_complete_completeEarly { get; }
+        public decimal TutorialTotalTime { get; }
+        public decimal TutorialMoveForwardTime { get; }
+        public bool TutorialMoveForwardCompleteEarly { get; }
+        public decimal TutorialRotateTime { get; }
+        public bool TutorialRotateCompleteEarly { get; }
+        public decimal TutorialTeleportTime { get; }
+        public bool TutorialTeleportCompleteEarly { get; }
+        public decimal TutorialThumbstickTime { get; }
+        public bool TutorialThumbstickCompleteEarly { get; }
+        public decimal TutorialCompleteTime { get; }
+        public bool TutorialCompleteCompleteEarly { get; }
 
         // Shower variables
-        public decimal shower_totalTime { get; }
-        public decimal shower_lumpTime { get; }
-        public decimal shower_swellingTime { get; }
-        public decimal shower_throbbingTime { get; }
+        public decimal ShowerTotalTime { get; }
+        public decimal ShowerLumpTime { get; }
+        public decimal ShowerSwellingTime { get; }
+        public decimal ShowerThrobbingTime { get; }
 
 
 
@@ -40,42 +40,53 @@ namespace EMATVRAnalysis
             decimal simulationTotalTime, 
             decimal tutorialTotalTime, 
             decimal tutorialMoveForwardTime,
-            bool tutorial_moveForwardCompleteEarly,
+            bool tutorialMoveForwardCompleteEarly,
             decimal tutorialRotateTime, 
-            bool tutorial_rotateCompleteEarly,
+            bool tutorialRotateCompleteEarly,
             decimal tutorialTeleportTime,
-            bool tutorial_TeleportCompleteEarly,
+            bool tutorialTeleportCompleteEarly,
             decimal tutorialThumbstickTime,
-            bool tutorial_thumbstickCompleteEarly,
+            bool tutorialThumbstickCompleteEarly,
             decimal tutorialCompleteTime,
-            bool tutorial_completeCompleteEarly)
+            bool tutorialCompleteCompleteEarly, 
+            decimal showerTotalTime, 
+            decimal showerLumpTime, 
+            decimal showerSwellingTime, 
+            decimal showerThrobbingTime
+            )
         {
             this.ID = ID;
-            simulation_totalTime = simulationTotalTime;
-            tutorial_totalTime = tutorialTotalTime;
-            tutorial_moveForwardTime = tutorialMoveForwardTime;
-            tutorial_rotateTime = tutorialRotateTime;
-            tutorial_teleportTime = tutorialTeleportTime;
-            tutorial_thumbstickTime = tutorialThumbstickTime;
-            tutorial_completeTime = tutorialCompleteTime;
-            tutorial_moveForward_completeEarly = tutorial_moveForwardCompleteEarly;
-            tutorial_rotate_completeEarly = tutorial_rotateCompleteEarly;
-            tutorial_teleport_completeEarly = tutorial_TeleportCompleteEarly;
-            tutorial_thumbstick_completeEarly = tutorial_thumbstickCompleteEarly;
-            tutorial_complete_completeEarly = tutorial_completeCompleteEarly;
+            SimulationTotalTime = simulationTotalTime;
+            
+            TutorialTotalTime = tutorialTotalTime;
+            TutorialMoveForwardTime = tutorialMoveForwardTime;
+            TutorialRotateTime = tutorialRotateTime;
+            TutorialTeleportTime = tutorialTeleportTime;
+            TutorialThumbstickTime = tutorialThumbstickTime;
+            TutorialCompleteTime = tutorialCompleteTime;
+            
+            TutorialMoveForwardCompleteEarly = tutorialMoveForwardCompleteEarly;
+            TutorialRotateCompleteEarly = tutorialRotateCompleteEarly;
+            TutorialTeleportCompleteEarly = tutorialTeleportCompleteEarly;
+            TutorialThumbstickCompleteEarly = tutorialThumbstickCompleteEarly;
+            TutorialCompleteCompleteEarly = tutorialCompleteCompleteEarly;
+            ShowerTotalTime = showerTotalTime;
+            ShowerLumpTime = showerLumpTime;
+            ShowerSwellingTime = showerSwellingTime;
+            ShowerThrobbingTime = showerThrobbingTime;
 
 
             printData();
 
-            if (simulation_totalTime <= 0 ||
-                tutorial_moveForwardTime <= 0 ||
-                tutorial_totalTime <= 0 || 
-                tutorial_rotateTime <= 0 || 
-                tutorial_teleportTime <= 0 ||
-                tutorial_thumbstickTime <= 0 ||
-                tutorial_completeTime <= 0)
+            if (SimulationTotalTime <= 0 ||
+                TutorialMoveForwardTime <= 0 ||
+                TutorialTotalTime <= 0 || 
+                TutorialRotateTime <= 0 || 
+                TutorialTeleportTime <= 0 ||
+                TutorialThumbstickTime <= 0 ||
+                TutorialCompleteTime <= 0)
             {
-                flagInAnalysis = true;
+                FlagInAnalysis = true;
             }
         }
 
@@ -83,19 +94,19 @@ namespace EMATVRAnalysis
         {
             Console.WriteLine();
             Console.WriteLine("ID: " + ID);
-            Console.WriteLine("Simulation Total Time: " + simulation_totalTime);
+            Console.WriteLine("Simulation Total Time: " + SimulationTotalTime);
             Console.WriteLine("\nTUTORIAL---------\n");
-            Console.WriteLine("Total Time: " + tutorial_totalTime);
-            Console.WriteLine("Move Forward Time: " + tutorial_moveForwardTime);
-            Console.WriteLine("Move Forward Completed Pre Audio: " + tutorial_moveForward_completeEarly);
-            Console.WriteLine("Rotate Time: " + tutorial_rotateTime);
-            Console.WriteLine("Rotate Completed Pre Audio: " + tutorial_rotate_completeEarly);
-            Console.WriteLine("Teleport Time: " + tutorial_teleportTime);
-            Console.WriteLine("Teleport Completed Pre Audio: " + tutorial_teleport_completeEarly);
-            Console.WriteLine("Thumbstick Time: " + tutorial_thumbstickTime);
-            Console.WriteLine("Thumbstick Completed Pre Audio: " + tutorial_thumbstick_completeEarly);
-            Console.WriteLine("Complete Time: " + tutorial_completeTime);
-            Console.WriteLine("Complete Completed Pre Audio: " + tutorial_complete_completeEarly);
+            Console.WriteLine("Total Time: " + TutorialTotalTime);
+            Console.WriteLine("Move Forward Time: " + TutorialMoveForwardTime);
+            Console.WriteLine("Move Forward Completed Pre Audio: " + TutorialMoveForwardCompleteEarly);
+            Console.WriteLine("Rotate Time: " + TutorialRotateTime);
+            Console.WriteLine("Rotate Completed Pre Audio: " + TutorialRotateCompleteEarly);
+            Console.WriteLine("Teleport Time: " + TutorialTeleportTime);
+            Console.WriteLine("Teleport Completed Pre Audio: " + TutorialTeleportCompleteEarly);
+            Console.WriteLine("Thumbstick Time: " + TutorialThumbstickTime);
+            Console.WriteLine("Thumbstick Completed Pre Audio: " + TutorialThumbstickCompleteEarly);
+            Console.WriteLine("Complete Time: " + TutorialCompleteTime);
+            Console.WriteLine("Complete Completed Pre Audio: " + TutorialCompleteCompleteEarly);
 
 
         }
