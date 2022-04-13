@@ -26,11 +26,7 @@ namespace EMATVRAnalysis
                 participants.Add(Processor.ProcessFile(f));
             }
 
-            foreach (var p in participants)
-            {
-                p.PrintData();
-                Console.WriteLine("====================================");
-            }
+            Reporter.GenerateParticipantCSV(participants.ToArray(), "participants.csv");
 
             Console.ReadKey();
         }

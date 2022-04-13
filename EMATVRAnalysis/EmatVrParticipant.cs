@@ -9,7 +9,7 @@ namespace EMATVRAnalysis
 {
     public class EmatVrParticipant
     {
-        private string ID { get; }
+        public string ID { get; }
         public bool FlagInAnalysis { get; }
         public decimal SimulationTotalTime { get; }
 

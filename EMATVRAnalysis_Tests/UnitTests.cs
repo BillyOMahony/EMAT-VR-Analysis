@@ -6,18 +6,8 @@ namespace EMATVRAnalysis.UnitTests
     [TestClass]
     public class ImportTests
     {
-        [TestMethod]
-        public void Test_IsAGreaterThanB_True()
-        {
-            // Arrange
-            var import = new Importer();
-
-            // Act
-            var result = import.IsAGreaterThanB(2, 1);
-
-            // Assert
-            Assert.AreEqual(true, result);
-        }
+     
+        
     }
 
     [TestClass]
