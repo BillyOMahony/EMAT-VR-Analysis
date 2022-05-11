@@ -91,7 +91,7 @@ namespace EMATVRAnalysis
             decimal tutorial_completeTime = GetTimeDifference(d, "CompleteTutorialAudioStarted", "FinalMarkerReached");
             
             // Tutorial bools
-            bool tutorial_moveForward_completeEarly = !d.ContainsKey("TeleportStateStarted");
+            bool tutorial_moveForward_completeEarly = !d.ContainsKey("MoveForwardStateStarted");
             bool tutorial_rotate_completeEarly = !d.ContainsKey("RotateStateStarted");
             bool tutorial_teleport_completeEarly = !d.ContainsKey("TeleportStateStarted");
             bool tutorial_thumbstick_completeEarly = !d.ContainsKey("ChangeControllerStateStarted");
@@ -105,7 +105,7 @@ namespace EMATVRAnalysis
 
             // Bedroom information
             decimal bedroom_totalTime = GetTimeDifference(d, "TesteStageStarted", "TesteStageEnded");
-            decimal bedroom_touchBookTime = GetTimeDifference(d, "TesteStageStarted", "BookOpened");
+            decimal bedroom_touchBookTime = GetTimeDifference(d, "OpenBookStateStarted", "BookOpened");
 
             int bedroom_cancer_pos, bedroom_epididymis_pos, bedroom_spermaticCord_pos;
             GetTesteSelectOrder(d, out bedroom_cancer_pos, out bedroom_epididymis_pos, out bedroom_spermaticCord_pos);

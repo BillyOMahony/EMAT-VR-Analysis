@@ -18,7 +18,7 @@ namespace EMATVRAnalysis
             string header = "ID, SimulationTotalTime, TutorialTotalTime, TutorialMoveForwardTime, TutorialMoveForwardCompleteEarly, TutorialRotateTime, " +
                 "TutorialRotateCompleteEarly, TutorialTeleportTime, TutorialTeleportCompleteEarly, TutorialThumbstickTime, TutorialThumbstickCompleteEarly, " +
                 "TutorialCompleteTime, TutorialCompleteCompleteEarly, ShowerTotalTime, ShowerLumpTime, ShowerSwellingTime, ShowerThrobbingTime, BedroomTotalTime, " +
-                "BedroomTouchBookTime, BedroomCancerSelectionPosition, BedroomEpididymisSelectionPosition, BedroomSpermaticCordSelectionPosition " +
+                "BedroomTouchBookTime, BedroomCancerSelectionPosition, BedroomEpididymisSelectionPosition, BedroomSpermaticCordSelectionPosition, " +
                 "RecapTotalTime, RecapFingerprintTime, RecapChecklistTime, RecapMedkitTime";
 
             List<string> lines = new List<string>();
